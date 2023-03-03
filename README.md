@@ -14,7 +14,7 @@ $ gem install fluent-logger
 
 # Installation
 
-[Installation](documentation/installation.md)  
+[Installation](documentation/installation.md)
 [Docker-installation](documentation/docker-installation.md)
 
 # Usage (Incoming Webhook)
@@ -36,7 +36,7 @@ Link for
 
 ### Parameter
 
-|parameter|description|type|dafault|
+|parameter|description|type|default|
 |---|---|---|---|
 |webhook_url|Incoming Webhook URI (Required for Incoming Webhook mode). See https://docs.mattermost.com/developer/webhooks-incoming.html|string|nil|
 |channel_id|the id of the channel where you want to receive the information|string|nil|
@@ -45,6 +45,7 @@ Link for
 |message|The message you want to send, can be a static message, which you add at this point, or you can receive the fluent infos with the %s|string|nil
 |enable_tls|you can set the communication channel if it uses tls|bool|true|
 |ca_path|you can set the path of the certificates|string|nil|
+|do_not_verify_tls|Turn off TLS verification|bool|false|
 
 ## Copyright
 

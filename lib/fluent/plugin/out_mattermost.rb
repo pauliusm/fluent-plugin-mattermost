@@ -26,6 +26,8 @@ module Fluent
 
       config_param :ca_path,  :string, default: nil
 
+      config_param :do_not_verify_tls, :bool, default: false
+
       def configure(conf)
         super
       end
@@ -55,6 +57,7 @@ module Fluent
 
         https = Net::HTTP.new(url.host, url.port)
         https.use_ssl = @enable_tls
+        https.verify_mode = OpenSSL::SSL::VERIFY_NONE if @do_not_verify_tls
         if !@ca_path.nil? and @enable_tls == true
             https.ca_path = @ca_path
         end
@@ -69,7 +72,7 @@ module Fluent
 
         if response.read_body != "ok"
           log.error "response from mattermost: ", response.read_body
-        else 
+        else
           puts response.read_body
         end
       end
@@ -89,7 +92,7 @@ module Fluent
         return payload
       end
 
-      def get_infos(chunk) 
+      def get_infos(chunk)
         messages = []
         messages << "\n"
         chunk.msgpack_each do |time, record|
